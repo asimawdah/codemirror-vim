@@ -2523,6 +2523,12 @@ testVim('visual_exit', function(cm, vim, helpers) {
   eqCursorPos(cm.getCursor('anchor'), cm.getCursor('head'));
   eq(vim.visualMode, false);
 }, { value: 'hello\nworld\nfoo' });
+testVim('visual_exit_at_end_of_line', function(cm, vim, helpers) {
+  helpers.doKeys('v', 'l', 'l', 'l', 'l', 'l', '<Esc>');
+  helpers.assertCursorAt(0, 4);
+  helpers.doKeys('l');
+  helpers.assertCursorAt(0, 4);
+}, { value: 'alpha' });
 testVim('visual_line', function(cm, vim, helpers) {
   helpers.doKeys('l', 'V', 'l', 'j', 'j', 'd');
   eq(' 4\n 5', cm.getValue());
